@@ -84,5 +84,15 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<MaddenNFL> maddennflList;
 
+    public List<MaddenNFL> getMaddennflList() {
+        return maddennflList;
+    }
+
+    public void setMaddennflList(List<MaddenNFL> maddennflList) {
+        this.maddennflList = maddennflList;
+    }
 }

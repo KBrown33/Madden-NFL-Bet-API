@@ -30,7 +30,7 @@ public class Team {
         this.name = name;
     }
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "team")
     @JsonIgnore
     private User user;
 }
