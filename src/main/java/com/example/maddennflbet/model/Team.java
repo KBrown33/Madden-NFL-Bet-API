@@ -21,15 +21,13 @@ public class Team {
     @Column
     private String name;
 
-    @Column
-    private Integer userId;
 
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @OneToOne(mappedBy = "user")
