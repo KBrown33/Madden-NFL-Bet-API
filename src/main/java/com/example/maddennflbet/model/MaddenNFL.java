@@ -28,4 +28,49 @@ public class MaddenNFL {
     @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Integer getUser_2() {
+        return user_2;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    public void setUser_2(Integer user_2) {
+        this.user_2 = user_2;
+    }
+
+    public MaddenNFL() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public MaddenNFL(Long id, Integer user_2, Integer money) {
+        this.id = id;
+        this.user_2 = user_2;
+        this.money = money;
+    }
+
+    @OneToMany
+    @JoinColumn(name = )
 }
