@@ -2,8 +2,11 @@ package com.example.maddennflbet.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "bets")
@@ -71,6 +74,17 @@ public class MaddenNFL {
         this.money = money;
     }
 
-    @OneToMany
-    @JoinColumn(name = )
+    public List<Winner> getWinnerList() {
+        return winnerList;
+    }
+
+    public void setWinnerList(List<Winner> winnerList) {
+        this.winnerList = winnerList;
+    }
+
+    @OneToMany(mappedBy = "maddenNFL", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Winner> winnerList;
+
+
 }
