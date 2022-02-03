@@ -5,8 +5,11 @@ import com.example.maddennflbet.model.MaddenNFL;
 import com.example.maddennflbet.model.Winner;
 import com.example.maddennflbet.service.WinnerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +20,7 @@ public class WinnerController {
 
     @Autowired
     public void setWinnerService(WinnerService winnerService) {
-        this.winnerService = winnerService;
+        this.WinnerService = winnerService;
     }
 
     @GetMapping("/winners")
@@ -71,21 +74,21 @@ public class WinnerController {
         return winnerService.getCategoryRecipe(winnerId, maddenNFLId);
     }
 
-    @PutMapping("/categories/{categoryId}/recipes/{recipeId}")
-    public Recipe updateCategoryRecipe(@PathVariable(value = "categoryId") Long categoryId,
-                                       @PathVariable(value = "recipeId") Long recipeId,
-                                       @RequestBody Recipe recipeObject) {
-        System.out.println("calling getCategoryRecipe ==>");
-        return categoryService.updateCategoryRecipe(categoryId, recipeId, recipeObject);
+    @PutMapping("/winners/{winnerId}/maddenNFL/{maddenNFLId}")
+    public MaddenNFL updateWinnerMaddenNFL(@PathVariable(value = "winnerId") Long winnerId,
+                                       @PathVariable(value = "maddenNFLId") Long maddenNFLId,
+                                       @RequestBody MaddenNFL maddenNFLObject) {
+        System.out.println("calling getWinnerMaddenNFL ==>");
+        return winnerService.updateWinnerMaddenNFL(winnerId, maddenNFLId, maddenNFLObject);
     }
 
-    @DeleteMapping("/categories/{categoryId}/recipes/{recipeId}")
-    public ResponseEntity<HashMap> deleteCategoryRecipe(
-            @PathVariable(value = "categoryId") Long categoryId, @PathVariable(value = "recipeId") Long recipeId) {
-        System.out.println("calling getCategoryRecipe ==>");
-        categoryService.deleteCategoryRecipe(categoryId, recipeId);
+    @DeleteMapping("/winners/{winnerId}/recipes/{maddenNFLId}")
+    public ResponseEntity<HashMap> deleteWinnerMaddenNFL(
+            @PathVariable(value = "winnerId") Long winnerId, @PathVariable(value = "maddenNFLId") Long maddenNFLId) {
+        System.out.println("calling getWinnerMaddenNFL ==>");
+        winnerService.deleteWinnerMaddenNFL(winnerId, maddenNFLId);
         HashMap responseMessage = new HashMap();
-        responseMessage.put("status", "recipe with id: " + recipeId + " was successfully deleted.");
+        responseMessage.put("status", "maddenNFL with id: " + maddenNFLId + " was successfully deleted.");
         return new ResponseEntity<HashMap>(responseMessage, HttpStatus.OK);
     }
 }
